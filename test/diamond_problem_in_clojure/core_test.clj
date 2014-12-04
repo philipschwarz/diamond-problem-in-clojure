@@ -52,21 +52,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (deftest appending-trailing-dashes
-  (let [number-of-letters (position-of \F)]
     (is (= (list (seq "A-----")
                  (seq "-B----")
                  (seq "--C---")
                  (seq "---D--")
                  (seq "----E-")
-                 (seq "-----F")
+                 (seq "-----F"))
             (map-indexed
-              trailing-dashes-appender-for
+              (trailing-dashes-appender-for (position-of \F))
               (list (seq "A")
                     (seq "-B")
                     (seq "--C")
                     (seq "---D")
                     (seq "----E")
-                    (seq "-----F"))))))))
+                    (seq "-----F"))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
