@@ -9,6 +9,9 @@
 (defn drop-first-column [sequence-of-sequences-of-chars]
   (map rest sequence-of-sequences-of-chars))
 
+(defn drop-first-row [sequence-of-sequences-of-chars]
+  (drop 1 sequence-of-sequences-of-chars))
+
 (defn reverse-every-row [sequence-of-sequences-of-chars]
   (map reverse sequence-of-sequences-of-chars))
 
@@ -36,10 +39,14 @@
 (defn create-top-half-of-diamond-with [top-left-quadrant top-right-quadrant]
   (join-together-side-by-side top-left-quadrant top-right-quadrant))
 
-(defn create-diamond-from [top-half-of-diamond]
-  (concat
-    top-half-of-diamond
-    (drop 1 (reverse top-half-of-diamond))))
+(defn flip-bottom-up [top-half-of-diamond]
+  (reverse top-half-of-diamond))
+
+(defn put-on-top-one-another [top-half-of-diamond bottom-half-of-diamond]
+  (concat top-half-of-diamond bottom-half-of-diamond))
+
+(defn create-bottom-half-of-diamond-from [top-half-of-diamond]
+  (drop-first-row (flip-bottom-up top-half-of-diamond)))
 
 (defn stringify [char-sequences]
   (map #(apply str %) char-sequences))
@@ -48,7 +55,8 @@
   (let [top-right-quadrant (create-top-right-quadrant-for letter)
         top-left-quadrant (create-top-left-quadrant-from top-right-quadrant)
         top-half-of-diamond (create-top-half-of-diamond-with top-left-quadrant top-right-quadrant)
-        diamond (create-diamond-from top-half-of-diamond)]
+        bottom-half-of-diamond (create-bottom-half-of-diamond-from top-half-of-diamond)
+        diamond (put-on-top-one-another top-half-of-diamond bottom-half-of-diamond)]
     (doseq [line (stringify diamond)]
       (println line))))
 

@@ -119,6 +119,24 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(deftest creating-bottom-half-of-diamond-from-top-half-of-diamond
+  (is (= (list
+           (seq "-E-------E-")
+           (seq "--D-----D--")
+           (seq "---C---C---")
+           (seq "----B-B----")
+           (seq "-----A-----"))
+         (create-bottom-half-of-diamond-from
+           (list
+             (seq "-----A-----")
+             (seq "----B-B----")
+             (seq "---C---C---")
+             (seq "--D-----D--")
+             (seq "-E-------E-")
+             (seq "F---------F"))))))
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (deftest creating-diamond-from-top-half-of-diamond
   (is (= (list (seq "-----A-----")
                (seq "----B-B----")
@@ -131,10 +149,15 @@
                (seq "---C---C---")
                (seq "----B-B----")
                (seq "-----A-----"))
-         (create-diamond-from
+         (put-on-top-one-another
            (list (seq "-----A-----")
                  (seq "----B-B----")
                  (seq "---C---C---")
                  (seq "--D-----D--")
                  (seq "-E-------E-")
-                 (seq "F---------F"))))))
+                 (seq "F---------F"))
+           (list (seq "-E-------E-")
+                 (seq "--D-----D--")
+                 (seq "---C---C---")
+                 (seq "----B-B----")
+                 (seq "-----A-----"))))))
