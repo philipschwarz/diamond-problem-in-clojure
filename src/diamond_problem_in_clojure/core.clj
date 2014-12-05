@@ -28,7 +28,10 @@
   (map core-letter-pattern-for (take (position-of letter) alphabet)))
 
 (defn trailing-dashes-appender-for [max-dash-count]
-  (fn [index line] (concat line (dashes (dec (- max-dash-count index))))))
+  (fn [index line]
+    (concat
+      line
+      (dashes (dec (- max-dash-count index))))))
 
 (defn flip-bottom-up [top-half-of-diamond]
   (reverse top-half-of-diamond))
