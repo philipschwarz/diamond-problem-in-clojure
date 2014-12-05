@@ -6,6 +6,12 @@
 
 (defn dashes [n] (repeat n \-))
 
+(defn drop-first-column [sequence-of-sequences-of-chars]
+  (map rest sequence-of-sequences-of-chars))
+
+(defn reverse-every-row [sequence-of-sequences-of-chars]
+  (map reverse sequence-of-sequences-of-chars))
+
 (defn core-letter-pattern-for [letter]
   (concat (dashes (dec (position-of letter))) (list letter)))
 
@@ -20,11 +26,15 @@
     (map-indexed (trailing-dashes-appender-for number-of-letters) (core-right-quadrant-pattern-for letter))))
 
 (defn create-top-left-quadrant-from [top-right-quadrant]
-  (map reverse
-       (map rest top-right-quadrant)))
+  (->> top-right-quadrant
+       drop-first-column
+       reverse-every-row))
+
+(defn join-together-side-by-side [top-left-quadrant top-right-quadrant]
+  (map concat top-left-quadrant top-right-quadrant))
 
 (defn create-top-half-of-diamond-with [top-left-quadrant top-right-quadrant]
-  (map concat top-left-quadrant top-right-quadrant))
+  (join-together-side-by-side top-left-quadrant top-right-quadrant))
 
 (defn create-diamond-from [top-half-of-diamond]
   (concat
