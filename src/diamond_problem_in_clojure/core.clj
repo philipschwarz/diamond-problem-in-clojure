@@ -59,8 +59,12 @@
 (defn put-one-on-top-of-the-other [top-half-of-diamond bottom-half-of-diamond]
   (concat top-half-of-diamond bottom-half-of-diamond))
 
-(defn strings-for [char-sequences]
-  (map #(apply str %) char-sequences))
+(defn strings-for [sequences-of-chars]
+  (map #(apply str %) sequences-of-chars))
+
+(defn display [sequence-of-sequences-of-chars]
+  (doseq [line (strings-for sequence-of-sequences-of-chars)]
+    (println line)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -70,8 +74,7 @@
         top-half-of-diamond (create-top-half-of-diamond-with top-left-quadrant top-right-quadrant)
         bottom-half-of-diamond (create-bottom-half-of-diamond-from top-half-of-diamond)
         diamond (put-one-on-top-of-the-other top-half-of-diamond bottom-half-of-diamond)]
-    (doseq [line (strings-for diamond)]
-      (println line))))
+    (display diamond)))
 
 (defn -main []
   (print-diamond \E))
