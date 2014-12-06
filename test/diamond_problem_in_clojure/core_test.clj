@@ -87,12 +87,13 @@
                (seq "--D--")
                (seq "-E---")
                (seq "F----"))
-        (create-top-left-quadrant-from (list (seq "A-----")
-                                             (seq "-B----")
-                                             (seq "--C---")
-                                             (seq "---D--")
-                                             (seq "----E-")
-                                             (seq "-----F"))))))
+          (drop-first-column-and-reverse-every-row-of
+            (list (seq "A-----")
+                  (seq "-B----")
+                  (seq "--C---")
+                  (seq "---D--")
+                  (seq "----E-")
+                  (seq "-----F"))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -103,7 +104,7 @@
                (seq "--D-----D--")
                (seq "-E-------E-")
                (seq "F---------F"))
-          (create-top-half-of-diamond-with
+          (join-together-side-by-side
             (list (seq "-----")
                   (seq "----B")
                   (seq "---C-")
@@ -126,7 +127,7 @@
            (seq "---C---C---")
            (seq "----B-B----")
            (seq "-----A-----"))
-         (create-bottom-half-of-diamond-from
+         (flip-bottom-up-and-drop-first-row-of
            (list
              (seq "-----A-----")
              (seq "----B-B----")
